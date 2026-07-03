@@ -6,8 +6,8 @@ const cookieParser = require("cookie-parser");
 
 const userRoute = require("./routes/userRoute");
  const stockRoute = require("./routes/stockRoute");
-// const orderRoute = require("./routes/orderRoute");
-// const transactionRoute = require("./routes/transactionRoute");
+const orderRoute = require("./routes/orderRoute");
+const transactionRoute = require("./routes/transactionRoute");
 
 
 dotenv.config();
@@ -36,8 +36,8 @@ app.get("/", (req, res) => {
 
 app.use("/api/users", userRoute);
 app.use("/api/stocks", stockRoute);
-// app.use("/api/orders", orderRoute);
-// app.use("/api/transactions", transactionRoute);
+app.use("/api/orders", orderRoute);
+app.use("/api/transactions", transactionRoute);
 
 const PORT = process.env.PORT || 8060;
 

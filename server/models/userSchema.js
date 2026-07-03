@@ -32,6 +32,32 @@ const userSchema = new mongoose.Schema(
       default: 100000,
       min: 0,
     },
+
+    portfolio: [
+      {
+        symbol: {
+          type: String,
+          required: true,
+          uppercase: true,
+          trim: true,
+        },
+        name: {
+          type: String,
+          required: true,
+          trim: true,
+        },
+        count: {
+          type: Number,
+          required: true,
+          min: 1,
+        },
+        avgPrice: {
+          type: Number,
+          required: true,
+          min: 0,
+        },
+      },
+    ],
   },
   {
     timestamps: true,

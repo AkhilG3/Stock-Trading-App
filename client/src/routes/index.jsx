@@ -1,59 +1,67 @@
-import React, { Suspense } from 'react';
-import { createBrowserRouter, Navigate } from 'react-router-dom';
-import { useAuth } from '../contexts/AuthContext';
-import { Skeleton } from '../components/ui/skeleton';
-import Landing from '../pages/Landing';
-import AuthLayout from '../layouts/AuthLayout';
-import MainLayout from '../layouts/MainLayout';
+import React, { Suspense } from "react";
+import { createBrowserRouter, Navigate } from "react-router-dom";
+import { useAuth } from "../contexts/AuthContext";
+import { Skeleton } from "../components/ui/skeleton";
 
-// Lazy load pages
-const Login = React.lazy(() => import('../pages/Login'));
-const Register = React.lazy(() => import('../pages/Register'));
-const Dashboard = React.lazy(() => import('../pages/Dashboard'));
-const StockSearch = React.lazy(() => import('../pages/StockSearch'));
-const StockDetails = React.lazy(() => import('../pages/StockDetails'));
-const Portfolio = React.lazy(() => import('../pages/Portfolio'));
-const Orders = React.lazy(() => import('../pages/Orders'));
-const Wallet = React.lazy(() => import('../pages/Wallet'));
-const Transactions = React.lazy(() => import('../pages/Transactions'));
-const Profile = React.lazy(() => import('../pages/Profile'));
-const NotFound = React.lazy(() => import('../pages/NotFound'));
+import Landing from "../pages/Landing";
+import AuthLayout from "../layouts/AuthLayout";
+import MainLayout from "../layouts/MainLayout";
+
+// Lazy loaded pages
+const Login = React.lazy(() => import("../pages/Login"));
+const Register = React.lazy(() => import("../pages/Register"));
+const Dashboard = React.lazy(() => import("../pages/Dashboard"));
+const StockSearch = React.lazy(() => import("../pages/StockSearch"));
+const StockDetails = React.lazy(() => import("../pages/StockDetails"));
+const Portfolio = React.lazy(() => import("../pages/Portfolio"));
+const Orders = React.lazy(() => import("../pages/Orders"));
+const Wallet = React.lazy(() => import("../pages/Wallet"));
+const Transactions = React.lazy(() => import("../pages/Transactions"));
+const Profile = React.lazy(() => import("../pages/Profile"));
+const NotFound = React.lazy(() => import("../pages/NotFound"));
+
+/* ---------------- Protected Route ---------------- */
 
 const ProtectedRoute = ({ children }) => {
   const { user, loading } = useAuth();
-  
+
   if (loading) {
     return (
-      <div className="min-h-screen bg-background flex items-center justify-center text-foreground">
+      <div className="min-h-screen flex items-center justify-center bg-background">
         Loading...
       </div>
     );
   }
-  
+
   if (!user) {
     return <Navigate to="/login" replace />;
   }
-  
+
   return children;
 };
 
+/* ---------------- Guest Only Route ---------------- */
+
 const PublicRoute = ({ children }) => {
   const { user, loading } = useAuth();
-  
+
   if (loading) {
     return (
-      <div className="min-h-screen bg-background flex items-center justify-center text-foreground">
+      <div className="min-h-screen flex items-center justify-center bg-background">
         Loading...
       </div>
     );
   }
-  
+
+  // Logged-in users should not see Login/Register pages
   if (user) {
     return <Navigate to="/dashboard" replace />;
   }
-  
+
   return children;
 };
+
+/* ---------------- Loading Skeleton ---------------- */
 
 const PageSkeleton = () => (
   <div className="min-h-screen bg-background p-6">
@@ -65,20 +73,21 @@ const PageSkeleton = () => (
   </div>
 );
 
+/* ---------------- Router ---------------- */
+
 export const router = createBrowserRouter([
+  // Landing Page (Accessible to Everyone)
   {
-    path: '/',
-    element: (
-      <PublicRoute>
-        <Landing />
-      </PublicRoute>
-    ),
+    path: "/",
+    element: <Landing />,
   },
+
+  // Authentication Pages
   {
     element: <AuthLayout />,
     children: [
       {
-        path: '/login',
+        path: "/login",
         element: (
           <PublicRoute>
             <Suspense fallback={<PageSkeleton />}>
@@ -88,7 +97,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: '/register',
+        path: "/register",
         element: (
           <PublicRoute>
             <Suspense fallback={<PageSkeleton />}>
@@ -99,6 +108,8 @@ export const router = createBrowserRouter([
       },
     ],
   },
+
+  // Protected Application
   {
     element: (
       <ProtectedRoute>
@@ -107,7 +118,7 @@ export const router = createBrowserRouter([
     ),
     children: [
       {
-        path: '/dashboard',
+        path: "/dashboard",
         element: (
           <Suspense fallback={<PageSkeleton />}>
             <Dashboard />
@@ -115,7 +126,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: '/stocks',
+        path: "/stocks",
         element: (
           <Suspense fallback={<PageSkeleton />}>
             <StockSearch />
@@ -123,7 +134,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: '/stocks/:symbol',
+        path: "/stocks/:symbol",
         element: (
           <Suspense fallback={<PageSkeleton />}>
             <StockDetails />
@@ -131,7 +142,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: '/portfolio',
+        path: "/portfolio",
         element: (
           <Suspense fallback={<PageSkeleton />}>
             <Portfolio />
@@ -139,7 +150,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: '/orders',
+        path: "/orders",
         element: (
           <Suspense fallback={<PageSkeleton />}>
             <Orders />
@@ -147,7 +158,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: '/wallet',
+        path: "/wallet",
         element: (
           <Suspense fallback={<PageSkeleton />}>
             <Wallet />
@@ -155,7 +166,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: '/transactions',
+        path: "/transactions",
         element: (
           <Suspense fallback={<PageSkeleton />}>
             <Transactions />
@@ -163,7 +174,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: '/profile',
+        path: "/profile",
         element: (
           <Suspense fallback={<PageSkeleton />}>
             <Profile />
@@ -172,8 +183,10 @@ export const router = createBrowserRouter([
       },
     ],
   },
+
+  // 404
   {
-    path: '*',
+    path: "*",
     element: (
       <Suspense fallback={<PageSkeleton />}>
         <NotFound />

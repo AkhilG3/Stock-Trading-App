@@ -3,6 +3,8 @@ import { motion } from "framer-motion";
 import PublicNavbar from "../components/PublicNavbar";
 import Footer from "../components/Footer";
 import { Button } from "../components/ui/button";
+import HeroPortfolioChart from "../components/HeroPortfolioChart";
+import AnimatedChartBackground from "../components/AnimatedChartBackground";
 import { Card, CardContent, CardHeader, CardTitle } from "../components/ui/card";
 import {
   TrendingUp,
@@ -71,75 +73,204 @@ const Landing = () => {
     <div className="min-h-screen bg-background">
       <PublicNavbar />
 
-      {/* Hero Section */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5 }}
-            >
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium mb-6">
-                <CheckCircle2 className="h-4 w-4" />
-                Trusted by 100K+ traders worldwide
-              </div>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-6">
-                Trade Stocks. <br />
-                <span className="text-primary">Build Wealth.</span>
-              </h1>
-              <p className="text-lg text-muted-foreground mb-8 max-w-lg">
-                The modern trading platform that makes investing simple, accessible, and rewarding for everyone.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4">
-                <Link to="/register">
-                  <Button size="lg" className="w-full sm:w-auto">
-                    Get Started Free
-                    <ArrowRight className="ml-2 h-4 w-4" />
-                  </Button>
-                </Link>
-                <Link to="/login">
-                  <Button variant="outline" size="lg" className="w-full sm:w-auto">
-                    Sign In
-                  </Button>
-                </Link>
-              </div>
-            </motion.div>
+      
+     {/* Hero Section */}
+<section id = "hero"  className="relative overflow-hidden pt-12 pb-16 px-4 sm:px-6 lg:px-8">
+  <AnimatedChartBackground />
 
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className="relative"
+  <div className="max-w-7xl mx-auto">
+    <div className="grid lg:grid-cols-12 gap-8 items-center">
+
+      {/* Left Side */}
+      <motion.div
+        initial={{ opacity: 0, x: -30 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.6 }}
+        className="lg:col-span-6"
+      >
+        <h1 className="text-5xl lg:text-6xl font-bold leading-tight">
+          Trade Smarter.
+          <br />
+          <span className="text-primary">
+            Invest Better.
+          </span>
+        </h1>
+
+        <p className="mt-6 text-lg text-muted-foreground leading-8 max-w-md">
+          Invest confidently with real-time market data,
+          portfolio tracking and a seamless virtual trading
+          experience designed for modern investors.
+        </p>
+
+        <div className="flex gap-4 mt-10">
+          <Link to="/register">
+            <Button size="lg">
+              Get Started Free
+              <ArrowRight className="ml-2 h-4 w-4"/>
+            </Button>
+          </Link>
+
+          <Link to="/login">
+            <Button
+              variant="outline"
+              size="lg"
             >
-              <div className="absolute -inset-4 bg-gradient-to-r from-primary/20 to-purple-500/20 rounded-3xl blur-2xl" />
-              <Card className="relative border-2">
-                <CardHeader>
-                  <CardTitle className="flex items-center justify-between">
-                    <span>Portfolio Overview</span>
-                    <span className="text-green-500 flex items-center gap-1 text-sm font-normal">
-                      <TrendingUp className="h-4 w-4" />
-                      +12.5%
-                    </span>
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  <div className="text-3xl font-bold">$125,000</div>
-                  <div className="h-32 bg-gradient-to-r from-primary/20 via-primary/10 to-transparent rounded-lg" />
-                  <div className="grid grid-cols-3 gap-4">
-                    {["AAPL", "TSLA", "GOOGL"].map((stock) => (
-                      <div key={stock} className="text-center p-3 bg-muted/50 rounded-lg">
-                        <div className="font-semibold">{stock}</div>
-                        <div className="text-xs text-green-500">+2.4%</div>
-                      </div>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
-            </motion.div>
-          </div>
+              Sign In
+            </Button>
+          </Link>
         </div>
-      </section>
+      </motion.div>
+
+      {/* Right Side */}
+      <motion.div
+        initial={{ opacity: 0, x: 30 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.6 }}
+        className="lg:col-span-6 relative flex justify-center"
+      >
+
+        <div className="absolute -inset-8 bg-primary/10 blur-3xl rounded-full"/>
+
+        <Card className="relative w-full max-w-[520px] mx-auto bg-card/90 backdrop-blur border border-border shadow-xl rounded-2xl">
+
+  <CardContent className="p-5">
+
+    {/* Header */}
+    <div className="flex justify-between items-start">
+
+      <div>
+        <p className="text-xs text-muted-foreground">
+          Portfolio Overview
+        </p>
+
+        <h2 className="text-3xl font-bold mt-1">
+          $125,483.52
+        </h2>
+
+        <div className="flex items-center gap-2 mt-1 text-green-500">
+          <TrendingUp className="h-4 w-4" />
+          <span className="text-sm font-semibold">
+            +$4,283.52 (+3.54%)
+          </span>
+        </div>
+      </div>
+
+      <div className="flex items-center gap-2 bg-green-500/10 px-3 py-1 rounded-full">
+    <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+    <span className="text-green-500 font-medium">
+        Market Open
+    </span>
+</div>
+
+    </div>
+
+    {/* Portfolio Chart */}
+
+    <div className="mt-8 rounded-xl bg-muted/20 p-2">
+    <HeroPortfolioChart />
+</div>
+
+    {/* Holdings */}
+
+    <div className="mt-5">
+
+      <div className="flex justify-between items-center mb-3">
+
+        <h3 className="text-sm font-semibold">
+          Top Holdings
+        </h3>
+
+        <span className="text-xs text-muted-foreground">
+          Allocation
+        </span>
+
+      </div>
+
+      <div className="grid grid-cols-2 gap-3">
+
+        {[
+          {
+            symbol: "AAPL",
+            sector: "Technology",
+            alloc: "32%",
+            change: "+2.8%",
+          },
+          {
+            symbol: "NVDA",
+            sector: "Technology",
+            alloc: "24%",
+            change: "+5.2%",
+          },
+          {
+            symbol: "MSFT",
+            sector: "Technology",
+            alloc: "18%",
+            change: "+1.7%",
+          },
+          {
+            symbol: "TSLA",
+            sector: "Automotive",
+            alloc: "15%",
+            change: "-0.8%",
+          },
+        ].map((stock) => (
+
+          <div
+            key={stock.symbol}
+            className="rounded-lg border bg-muted/30 p-3 hover:border-primary transition-all duration-300"
+          >
+
+            <div className="flex justify-between items-start">
+
+              <div>
+
+                <p className="font-semibold text-sm">
+                  {stock.symbol}
+                </p>
+
+                <p className="text-[11px] text-muted-foreground">
+                  {stock.sector}
+                </p>
+
+              </div>
+
+              <div className="text-right">
+
+                <p className="text-sm font-semibold">
+                  {stock.alloc}
+                </p>
+
+                <p
+                  className={`text-[11px] ${
+                    stock.change.startsWith("-")
+                      ? "text-red-500"
+                      : "text-green-500"
+                  }`}
+                >
+                  {stock.change}
+                </p>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        ))} 
+
+      </div>
+
+    </div>
+
+  </CardContent>
+
+</Card>
+
+      </motion.div>
+
+    </div>
+  </div>
+</section>
 
       {/* Stats Section */}
       <section className="py-16 px-4 sm:px-6 lg:px-8 bg-card border-y">
@@ -166,7 +297,7 @@ const Landing = () => {
       </section>
 
       {/* Features Section */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8">
+      <section id="features" className="py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">Why Choose StockTrader</h2>
@@ -202,7 +333,7 @@ const Landing = () => {
       </section>
 
       {/* Why Choose Us */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-card border-y">
+      <section id = "about" className="py-20 px-4 sm:px-6 lg:px-8 bg-card border-y">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <motion.div

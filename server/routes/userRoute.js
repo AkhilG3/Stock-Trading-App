@@ -17,5 +17,6 @@ router.post("/login", login);
 // Protected Routes
 router.post("/logout", authMiddleware, logout);
 router.get("/profile", authMiddleware, getProfile);
+router.get("/me", authMiddleware, getProfile);
 
 module.exports = router;

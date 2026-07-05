@@ -5,7 +5,7 @@ const cors = require("cors");
 const cookieParser = require("cookie-parser");
 
 const userRoute = require("./routes/userRoute");
- const stockRoute = require("./routes/stockRoute");
+const stockRoute = require("./routes/stockRoute");
 const orderRoute = require("./routes/orderRoute");
 const transactionRoute = require("./routes/transactionRoute");
 
@@ -20,7 +20,7 @@ const app = express();
 // Middleware
 app.use(
     cors({
-        origin: process.env.DEV_URL,
+        origin: true,
         credentials: true,
     })
 );

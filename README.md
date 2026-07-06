@@ -393,7 +393,7 @@ Distributed under the MIT License. See `LICENSE` for more information.
 ## Author
 
 **Your Name**  
-- GitHub: [@your-username](https://github.com/your-username)
+- GitHub: [@your-username](https://github.com/AkhilG3)
 - LinkedIn: [Your LinkedIn Profile](https://linkedin.com/in/your-profile)
 - Email: your.email@example.com
 
